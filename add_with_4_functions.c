@@ -1,13 +1,10 @@
 //Write a program to add two user input numbers using 4 functions.
 
 #include<stdio.h>
-
 float read_num();
-
 float calc_sum(float  , float );
 
 int display(float );
-
 int main()
 {
     read_num();
