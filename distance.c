@@ -1,39 +1,34 @@
-#include<stdio.h>
+// Finding distance between 2 points
+#include <stdio.h>
 #include<math.h>
-
-int read_coordinates();
-
-float calculate_dist(float , float, float, float);
-
-int display(float);
-
-int read_parameters()
+float input(char b[])
 {
-    float x1,y1,x2,y2,dist;
-    printf("enter the first coordinates(x1,y1): ");
-    scanf("%f %f",&x1,&y1);
-    printf("enter the second coordinates(x2,y2): ");
-    scanf("%f %f",&x2,&y2);
-    dist = calculate_dist(x1,y1,x2,y2);
-    display(dist);
-    return 0;
+    float a;
+    printf("Enter the value of %s: ",b);
+    scanf("%f",&a);
+    return a;
 }
 
-float calculate_dist(float x1, float y1, float x2, float y2)
+float compute_distance(float x1,float y1,float x2,float y2 )
 {
     float dist;
-    dist = sqrt((pow((x2-x1),2)+pow((y2-y1),2)));
+    dist=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
     return dist;
 }
 
-int display(float dist)
+void output(float res)
 {
-    printf("\n The distance between two points is : %.2f: \n",dist);
-    return 0;
+    printf("Distance between two points: %f",res);
 }
 
 int main()
 {
-    read_parameters();
+    float x1,y1,x2,y2,res;
+    x1=input("x1");
+    x2=input("x2");
+    y1=input("y1");
+    y2=input("y2");
+    res=compute_distance(x1,y1,x2,y2);
+    output(res);
     return 0;
 }
