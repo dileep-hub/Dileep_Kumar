@@ -2,38 +2,36 @@
 
 #include <stdio.h>
 #include <math.h>
-struct point{
-    float x, y;
-};
-
-struct point get_prams()
+struct point
 {
-    struct point p1;
-    printf("\nEnter the coordinates: ");
-    scanf("%f %f",&p1.x,&p1.y);
-    return p1;
+    float x;
+    float y;
+};
+typedef struct point Point;
+Point input(char b[])
+{
+    Point p;
+    printf("Enter the value of %s: ",b);
+    scanf("%f%f",&p.x,&p.y);
+    return p;
 }
-
-float compute(struct point * c1, struct point * c2){
+float compute_distance(Point p1,Point p2)
+{
     float distance;
-    distance = sqrt((c1->x - c2->x) * (c1->x - c2->x) + (c1->y - c2->y) *(c1->y - c2->y));
+    distance=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
     return distance;
 }
-
-int display(float* dist)
+void output(Point p1, Point p2, float dist)
 {
-    printf("\n Distance between points is: %.2f \n", *dist);
-    return 0;
+    printf("The distance between %f,%f and %f,%f is %f",p1.x,p1.y,p2.x,p2.y,dist);
 }
-
-
-int main(){
-    struct point c1,c2;
+int main(void)
+{
     float dist;
-    c1=get_prams();
-    c2=get_prams();
-    dist = compute(&c1,&c2);
-    display(&dist);
-   
+    Point p1,p2;
+    p1=input("x1,y1");
+    p2=input("x2,y2");
+    dist=compute_distance(p1,p2);
+    output(p1,p2,dist);
     return 0;
 }
