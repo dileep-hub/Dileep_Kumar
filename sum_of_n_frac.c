@@ -1,80 +1,90 @@
 #include<stdio.h>
-typedef struct fraction
+struct Fraction
 {
-int n;
-int d;
-} frac;
-frac
-input()
+    int  num;
+    int  deno;
+};
+typedef struct Fraction fraction;
+int get_n()
 {
-frac a;
-printf("enter numerator: \n");
-scanf("%d", &a.n);
-printf("enter denominator: \n");
-scanf("%d", &a.d);
-return a;
+    int n;
+    printf("Enter the number of fractions: \n");
+    scanf("%d",&n);
+    return n;
 }
-
-frac add(frac f1, frac f2, frac sum)
+fraction input()
 {
-    int gcd = 1;
-    int i;
-
-sum.d = f1.d * f2.d;
-sum.n = f1.n * f2.d + f2.n * f1.d;
-for (i = 1; i <= sum.n && i <= sum.d; i++)
-    
- 
+    fraction a;
+    printf("Enter the numerator\n");
+    scanf("%d",&a.num);
+    printf("Enter the denominator\n");
+    scanf("%d",&a.deno);
+    return a;
+}
+void get_fraction(int n,fraction a[])
+{
+    for(int i=0;i<n;i++)
     {
-if ((sum.n) % i == 0 && (sum.d) % i == 0)
-gcd = i;
-}
-sum.d = (sum.d) / gcd;
-sum.n = sum.n / gcd;
-return sum;
-}  
-
-frac input_n (int n, frac a[])
-{
-
-frac sum;
-int i;
-for (i = 0; i < n; i++)
-{
-printf("for fraction %d \n", (i + 1));
-a[i]=input();
+        printf("For fraction %d\n",(i+1));
+        a[i]=input();
     }
 }
-frac compute_n(int n,frac a[]){
-    frac c;
-    c.d=1;c.n=0;
-    frac sum;
-    for (int i = 0; i < n; i++)
-    
+fraction sum(fraction a,fraction b)
+{
+    fraction res;
+    if(a.deno==b.deno)
     {
-
-c = add(c, a[i], sum);
+        res.deno=a.deno;
+        res.num=a.num+b.num;
+    }
+    else 
+    {
+        res.deno=a.deno*b.deno;
+        res.num=(a.num*b.deno)+(b.num*a.deno);
+    }
+    return res;
 }
-return c;
-}
-void
-output_n (int n, frac c)
+int find_gcd(int a,int b)
 {
-printf("final sum of given %d fractions is = %d/%d", n, c.n, c.d);
+    int temp;
+    while(a!=0)
+    {
+        temp=a;
+        a=b%a;
+        b=temp;
+    }
+    return b;
 }
-int 
-main()
+fraction compute_sum(fraction c)
 {
+    int gcd=find_gcd(c.num,c.deno);
+    c.num=c.num/gcd;
+    c.deno=c.deno/gcd;
+    return c;
+}
 
-int  n;
-frac a[100];
-printf("enter the fractions \n");
-
-scanf("%d", &n);
-input_n(n,a);
-frac m=compute_n(n,a);
-
-output_n(n,m);
-
-return 0;
+void output(fraction res)
+{
+    printf("The final sum is %d/%d ",res.num,res.deno);
+}
+fraction add_fraction(int n,fraction a[])
+{
+    fraction c;
+    c.num=0;
+    c.deno=1;
+    for(int i=0;i<n;i++)
+    {
+        c=sum(c,a[i]);
+    }
+    c=compute_sum(c);
+    return c;
+}
+int main()
+{
+    int n=get_n();
+    fraction c,a[n],res;
+    get_fraction(n,a);
+    res=add_fraction(n,a);
+    output(res);
+    return 0;
 }
