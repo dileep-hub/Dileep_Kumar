@@ -1,31 +1,47 @@
 #include<stdio.h>
-int a[100], i, j;
-int sum = 0;
-int main()
+
+
+int readarr(int n,int* arr)
 {
-    printf("Enter the number of elements you are going to enter \n");
-    scanf("%d", &j);
-    int y = input();
-    tsum(y);
+    for(int i=0;i<n;i++)
+    {
+        printf("\n Enter number:");
+        scanf("%d",&arr[i]);
+    }
+    
+    return 0;
 }
 
-int 
-input()
+int calc_sum(int n,int* arr)
 {
-    printf("enter the numbers \n");
-    for (i=0; i<j; i++)
-        {
-            scanf("%d", &a[i]);
-        }
-    return a;
+    int sum=0 ;
+    for(int i=0;i<n;i++)
+  {
+      printf("%d \n",arr[i]);
+  }
+    for(int i=0;i<n;i++)
+    {
+        sum +=arr[i];
+    }
+    return sum;
 }
-int 
-tsum()
+
+int display(int* sum)
 {
-    for (i=0; i <= j; i++)
-      {
-        sum = sum + a[i];
-      }
-    printf("sum=%d", sum);
-return 0;
+    printf("\n Sum is: %d \n",*sum);
+    return 0;
+}
+
+
+int main()
+{
+  int n,sum=0;
+  printf("Enter the n value: ");
+  scanf("%d",&n);
+  
+  int arr[n];
+  readarr(n,arr);
+  sum = calc_sum(n,arr);
+   display(&sum);
+  return 0;
 }
